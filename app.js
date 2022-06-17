@@ -10,6 +10,14 @@ const path=require('path');
 
 app.use(bodyParser.urlencoded({extended:false}));
 
+const connection=require('./utility/database');
+connection.execute('SELECT * FROM products')
+  .then((result) => {
+    console.log(result);
+  }).catch((err) => {
+    console.log(err);
+  });
+
 app.use(express.static(path.join(__dirname,'publlic')));
 
 app.use(adminRoutes);
